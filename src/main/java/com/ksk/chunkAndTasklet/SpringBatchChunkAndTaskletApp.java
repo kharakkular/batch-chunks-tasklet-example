@@ -14,17 +14,18 @@ import org.springframework.batch.core.repository.JobInstanceAlreadyCompleteExcep
 import org.springframework.batch.core.repository.JobRestartException;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
+import com.ksk.chunkAndTasklet.config.ChunksConfig;
 import com.ksk.chunkAndTasklet.config.TaskletConfig;
 
 public class SpringBatchChunkAndTaskletApp {
 	private static Logger logger = LogManager.getLogger(SpringBatchChunkAndTaskletApp.class);
 	public static void main(String[] args) {
 		AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext();
-		context.register(TaskletConfig.class);
+		context.register(ChunksConfig.class);
 		context.refresh();
 		
-		JobLauncher launcher = (JobLauncher) context.getBean("jobLauncher");
-		Job job = (Job) context.getBean("taskletJob");
+		JobLauncher launcher = (JobLauncher) context.getBean("chunkJobLauncher");
+		Job job = (Job) context.getBean("chunkJob");
 		
 		JobParameters jobParameters = new JobParametersBuilder().addString("jobId", String.valueOf(System.currentTimeMillis())).toJobParameters();
 		

@@ -87,7 +87,7 @@ public class FileUtils {
 	}
 
 	public void closeWriter() throws IOException {
-		fileWriter.close();
 		csvWriter.close();
+		fileWriter.close();
 	}
 }
